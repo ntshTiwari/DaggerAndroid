@@ -12,9 +12,17 @@ import dagger.Component
 @Component
 interface UserComponent {
 
-    /// when anything asks for this object dagger will try to create an object for [UserRegistrationService]
-    /// so, it should be mentioned to dagger on how to create that object
-    fun getUserRegistrationService(): UserRegistrationService
+    /// here we pass our consumer, in this case it is MainActivity
+    ///     and when we do so, dagger will populate all the fields marked as Inject in the consumer
+    fun inject(mainActivity: MainActivity)
 
-    fun getEmailService(): EmailService
+
+    //// with this approach, we will have to define functions for all services we need
+    //// might be too much task,
+    //// so we can use field injection with activity rather than this method
+//    /// when anything asks for this object dagger will try to create an object for [UserRegistrationService]
+//    /// so, it should be mentioned to dagger on how to create that object
+//    fun getUserRegistrationService(): UserRegistrationService
+//
+//    fun getEmailService(): EmailService
 }
