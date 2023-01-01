@@ -1,5 +1,7 @@
 package com.example.daggerandroid
 
+import com.example.daggerandroid.modules.NotificationServiceModule
+import com.example.daggerandroid.modules.UserRepositoryModule
 import dagger.Component
 
 /// this is a component
@@ -9,7 +11,8 @@ import dagger.Component
 ///     the information can be provided to dagger using annotations like @inject and constructor
 ///     which means when we have to inject that object we can use its constructor to create that object
 
-@Component
+//// now we pass the modules that will help this component to create the objects it will need
+@Component(modules = [UserRepositoryModule::class, NotificationServiceModule::class])
 interface UserComponent {
 
     /// here we pass our consumer, in this case it is MainActivity
