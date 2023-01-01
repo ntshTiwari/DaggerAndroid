@@ -2,12 +2,13 @@ package com.example.daggerandroid.modules
 
 import com.example.daggerandroid.NotificationService
 import com.example.daggerandroid.SmsService
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
 /// A module can be used by a component to get the desired objects
 @Module
-class NotificationServiceModule {
+abstract class NotificationServiceModule {
 
     /// @Provides tells Dagger that, whenever it needs an element of NotificationService,
     /// it can use the function getSmsService() to create it
@@ -15,8 +16,8 @@ class NotificationServiceModule {
     /// as it knows how to instantiate an element for SmsService, i.e calling its constructor,
     /// so, we can change the implementation to this
 
-    @Provides
-    fun getSmsService(smsService: SmsService): NotificationService{
-        return smsService
-    }
+    /// as there is no body needed, we change the implementation to an abstract and let the passed parameter get returned
+    /// For that we will have to use the @Binds keyword
+    @Binds
+    abstract fun getSmsService(smsService: SmsService): NotificationService
 }
