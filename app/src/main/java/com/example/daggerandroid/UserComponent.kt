@@ -16,6 +16,13 @@ import dagger.Component
 @Component(modules = [UserRepositoryModule::class, NotificationServiceModule::class])
 interface UserComponent {
 
+    /// we can create a factory component instance, which will now create the `UserComponent` class for us
+    @Component.Factory
+    interface Factory {
+        /// as one of our internal Modules need an integer value to be created, so we accept an Int here, while creating the object
+        fun create(@BindsInstance retryCount: Int): UserComponent
+    }
+
     /// here we pass our consumer, in this case it is MainActivity
     ///     and when we do so, dagger will populate all the fields marked as Inject in the consumer
     fun inject(mainActivity: MainActivity)

@@ -22,10 +22,14 @@ class MainActivity : AppCompatActivity() {
 
         /// now we can use the Dagger version of the component to build the component
         /// the name of the component will be `Dagger$<interface_name>'
-        val userComponent = DaggerUserComponent.builder()
-            .notificationServiceModule(NotificationServiceModule(3))
-            /// as we need to provide a value (retryCount) to our NotificationServiceModule, so we need to create the module here now
-            .build()
+//        val userComponent = DaggerUserComponent.builder()
+//            .notificationServiceModule(NotificationServiceModule(3))
+//            /// as we need to provide a value (retryCount) to our NotificationServiceModule, so we need to create the module here now
+//            .build()
+
+        /// as we are now using a factory method, so we will use the factory method to create the object
+        val userComponent = DaggerUserComponent.factory().create(3) /// our create method needs a value to change so, we pass it here
+        /// one of the benefits of defining a factory method is that, we will know in runtime what values needs to be passed,
         userComponent.inject(this)
 
         /// then we can use the components to get our instances, dagger will create everything for us
