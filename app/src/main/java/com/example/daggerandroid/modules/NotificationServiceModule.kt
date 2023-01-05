@@ -11,7 +11,7 @@ import javax.inject.Named
 
 /// A module can be used by a component to get the desired objects
 @Module
-class NotificationServiceModule {
+class NotificationServiceModule(private val retryCount: Int) {
 
     /// @Provides tells Dagger that, whenever it needs an element of NotificationService,
     /// it can use the function getSmsService() to create it
@@ -23,8 +23,8 @@ class NotificationServiceModule {
     /// For that we will have to use the @Binds keyword
     @SmsQualifier
     @Provides
-    fun getSmsService(smsService: SmsService): NotificationService {
-        return smsService
+    fun getSmsService(): NotificationService {
+        return SmsService(retryCount)
     }
 
     /// we can have more than one function returning the same object, here NotificationService

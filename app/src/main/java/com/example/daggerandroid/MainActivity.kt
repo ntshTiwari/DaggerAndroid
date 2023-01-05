@@ -2,6 +2,7 @@ package com.example.daggerandroid
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.daggerandroid.modules.NotificationServiceModule
 import dagger.Component
 import javax.inject.Inject
 
@@ -21,7 +22,10 @@ class MainActivity : AppCompatActivity() {
 
         /// now we can use the Dagger version of the component to build the component
         /// the name of the component will be `Dagger$<interface_name>'
-        val userComponent = DaggerUserComponent.builder().build()
+        val userComponent = DaggerUserComponent.builder()
+            .notificationServiceModule(NotificationServiceModule(3))
+            /// as we need to provide a value (retryCount) to our NotificationServiceModule, so we need to create the module here now
+            .build()
         userComponent.inject(this)
 
         /// then we can use the components to get our instances, dagger will create everything for us

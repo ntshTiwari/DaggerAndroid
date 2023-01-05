@@ -2,6 +2,7 @@ package com.example.daggerandroid
 
 import com.example.daggerandroid.modules.NotificationServiceModule
 import com.example.daggerandroid.modules.UserRepositoryModule
+import dagger.BindsInstance
 import dagger.Component
 
 /// this is a component
