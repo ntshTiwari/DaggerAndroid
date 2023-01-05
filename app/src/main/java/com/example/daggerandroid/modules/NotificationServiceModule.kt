@@ -3,6 +3,7 @@ package com.example.daggerandroid.modules
 import com.example.daggerandroid.EmailService
 import com.example.daggerandroid.NotificationService
 import com.example.daggerandroid.SmsService
+import com.example.daggerandroid.annotations.SmsQualifier
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -20,7 +21,7 @@ class NotificationServiceModule {
 
     /// as there is no body needed, we change the implementation to an abstract and let the passed parameter get returned
     /// For that we will have to use the @Binds keyword
-    @Named("sms")
+    @SmsQualifier
     @Provides
     fun getSmsService(smsService: SmsService): NotificationService {
         return smsService

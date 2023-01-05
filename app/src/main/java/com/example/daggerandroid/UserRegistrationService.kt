@@ -1,5 +1,6 @@
 package com.example.daggerandroid
 
+import com.example.daggerandroid.annotations.SmsQualifier
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -14,7 +15,7 @@ import javax.inject.Named
 class UserRegistrationService @Inject constructor(
     private val userRepository: UserRepository,
     /// even while consuming, we need to mention the @Named annotation with the name, to let dagger know what do we want to consume
-    @Named("email") private val notificationService: NotificationService,
+    @SmsQualifier private val notificationService: NotificationService,
 ) /// this is called constructor injection
 {
     fun resisterUser(email: String, password: String){
