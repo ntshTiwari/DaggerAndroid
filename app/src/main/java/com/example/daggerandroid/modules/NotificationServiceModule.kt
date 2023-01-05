@@ -1,14 +1,16 @@
 package com.example.daggerandroid.modules
 
+import com.example.daggerandroid.EmailService
 import com.example.daggerandroid.NotificationService
 import com.example.daggerandroid.SmsService
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import javax.inject.Named
 
 /// A module can be used by a component to get the desired objects
 @Module
-abstract class NotificationServiceModule {
+class NotificationServiceModule {
 
     /// @Provides tells Dagger that, whenever it needs an element of NotificationService,
     /// it can use the function getSmsService() to create it
@@ -18,6 +20,20 @@ abstract class NotificationServiceModule {
 
     /// as there is no body needed, we change the implementation to an abstract and let the passed parameter get returned
     /// For that we will have to use the @Binds keyword
-    @Binds
-    abstract fun getSmsService(smsService: SmsService): NotificationService
+    @Named("sms")
+    @Provides
+    fun getSmsService(smsService: SmsService): NotificationService {
+        return smsService
+    }
+
+    /// we can have more than one function returning the same object, here NotificationService
+    /// in this case, to clear any confusion for dagger,
+    /// we use @Named annotations, it will be same while defining and consuming
+    /// using which dagger will come to know which function/@Provides to use
+
+    @Named("email")
+    @Provides
+    fun getEmailService(emailService: EmailService): NotificationService{
+        return emailService;
+    }
 }

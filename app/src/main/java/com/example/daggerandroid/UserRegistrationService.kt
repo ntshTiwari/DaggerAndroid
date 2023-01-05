@@ -1,6 +1,7 @@
 package com.example.daggerandroid
 
 import javax.inject.Inject
+import javax.inject.Named
 
 /// now the parameters can be passed to this class
 /// so, now they are not closely binded
@@ -12,11 +13,12 @@ import javax.inject.Inject
 /// so, we need to tell Dagger how to create their objects
 class UserRegistrationService @Inject constructor(
     private val userRepository: UserRepository,
-    private val emailService: EmailService,
+    /// even while consuming, we need to mention the @Named annotation with the name, to let dagger know what do we want to consume
+    @Named("email") private val notificationService: NotificationService,
 ) /// this is called constructor injection
 {
     fun resisterUser(email: String, password: String){
         userRepository.saveUser(email, password);
-        emailService.send(email, "no-resply@google.com", "body")
+        notificationService.send(email, "no-resply@google.com", "body")
     }
 }
