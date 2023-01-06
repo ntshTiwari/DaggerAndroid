@@ -14,6 +14,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var userRegistrationService: UserRegistrationService
     @Inject
     lateinit var emailService: EmailService
+    /// as emailService is a singleton, so it will have only one instance
+    @Inject
+    lateinit var emailService2: EmailService
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +31,8 @@ class MainActivity : AppCompatActivity() {
 //            .build()
 
         /// as we are now using a factory method, so we will use the factory method to create the object
+        /// all the singleton defined in this component are singleton for this component only,
+        /// if we create new component then we will have new instances of the elements
         val userComponent = DaggerUserComponent.factory().create(3) /// our create method needs a value to change so, we pass it here
         /// one of the benefits of defining a factory method is that, we will know in runtime what values needs to be passed,
         userComponent.inject(this)

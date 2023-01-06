@@ -3,6 +3,7 @@ package com.example.daggerandroid
 import android.content.ContentValues.TAG
 import android.util.Log
 import javax.inject.Inject
+import javax.inject.Singleton
 
 interface NotificationService {
     fun send(to: String, from: String, body: String?)
@@ -10,6 +11,8 @@ interface NotificationService {
 
 /// here we use the [@Inject] annotation, which mean when dagger has to inject this object it can
 /// create it using the constructor of the EmailService class
+/// this @Singleton creates an @Scope for the class,
+@Singleton
 class EmailService @Inject constructor() : NotificationService {
     override fun send(to: String, from: String, body: String?){
         Log.e(TAG, "Email sent from: $from to: $to");

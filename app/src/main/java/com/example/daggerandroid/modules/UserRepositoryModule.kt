@@ -5,6 +5,7 @@ import com.example.daggerandroid.UserRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 abstract class UserRepositoryModule {
@@ -19,5 +20,6 @@ abstract class UserRepositoryModule {
 
     /// the above `@Provides` method can be changed to `@Binds` method like this
     @Binds
+    @Singleton
     abstract fun getFirebaseRepository(firebaseRepository: FirebaseRepository): UserRepository;
 }

@@ -8,6 +8,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
+import javax.inject.Singleton
 
 /// A module can be used by a component to get the desired objects
 @Module
@@ -24,6 +25,7 @@ class NotificationServiceModule(
 
     /// as there is no body needed, we change the implementation to an abstract and let the passed parameter get returned
     /// For that we will have to use the @Binds keyword
+    @Singleton
     @SmsQualifier
     @Provides
     fun getSmsService(retryCount: Int) /// this Int will be passed to it from its Component function now
@@ -36,6 +38,7 @@ class NotificationServiceModule(
     /// we use @Named annotations, it will be same while defining and consuming
     /// using which dagger will come to know which function/@Provides to use
 
+    @Singleton
     @Named("email")
     @Provides
     fun getEmailService(emailService: EmailService): NotificationService{

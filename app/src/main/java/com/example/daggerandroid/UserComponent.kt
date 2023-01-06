@@ -4,6 +4,7 @@ import com.example.daggerandroid.modules.NotificationServiceModule
 import com.example.daggerandroid.modules.UserRepositoryModule
 import dagger.BindsInstance
 import dagger.Component
+import javax.inject.Singleton
 
 /// this is a component
 /// which will create all the objects for us to use
@@ -13,6 +14,8 @@ import dagger.Component
 ///     which means when we have to inject that object we can use its constructor to create that object
 
 //// now we pass the modules that will help this component to create the objects it will need
+/// in order for the objects to be singleton the component has to be @Singleton as well
+@Singleton
 @Component(modules = [UserRepositoryModule::class, NotificationServiceModule::class])
 interface UserComponent {
 
