@@ -33,8 +33,11 @@ class MainActivity : AppCompatActivity() {
         /// as we are now using a factory method, so we will use the factory method to create the object
         /// all the singleton defined in this component are singleton for this component only,
         /// if we create new component then we will have new instances of the elements
-        val userComponent = DaggerUserComponent.factory().create(3) /// our create method needs a value to change so, we pass it here
+//        val userComponent = DaggerUserComponent.factory().create(3) /// our create method needs a value to change so, we pass it here
         /// one of the benefits of defining a factory method is that, we will know in runtime what values needs to be passed,
+
+        /// after adding application level scope, singleton
+        val userComponent = (application as UserApplication).userComponent
         userComponent.inject(this)
 
         /// then we can use the components to get our instances, dagger will create everything for us
